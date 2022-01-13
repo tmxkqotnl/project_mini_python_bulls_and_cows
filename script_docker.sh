@@ -1,14 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 echo $1
-
 cmd=$1
 
-if [${cmd} -eq "up"]; 
+if [ $cmd = "up" ]
 then
     docker-compose up -d
-elif [${cmd} -eq "down"];
+elif [ $cmd = "down" ]
 then
     docker-compose down -v
-elif [${cmd} -eq "reset"]
+elif [ $cmd = "reset" ]
+then
     docker-compose down -v && docker-compose up -d
+else
+    echo "no matched key $cmd"
+fi

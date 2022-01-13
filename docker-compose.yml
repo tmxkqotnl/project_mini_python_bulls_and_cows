@@ -2,7 +2,7 @@ version: "3.9"
 services:
   db:
     container_name: postgres
-    image: postgres
+    image: postgres:latest
     restart: always
     environment:
       TZ: Asia/Seoul
@@ -18,7 +18,7 @@ services:
 
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     restart: always
     environment:
       - TZ=Asia/Seoul
