@@ -1,4 +1,4 @@
-from controller.dbController import init_database
+from controller.db_controller import init_database
 from dotenv import load_dotenv
 import os
 
