@@ -19,13 +19,12 @@ db_info: dict[str, str] = {
 }
 
 
-def db_init():
-
+def seed_db_init():
     db = DB()
     # 데이터베이스 생성을 위한 시나리오
     info_str = spread_dict(db_info)
     db.connect(info_str)
-    db_name = "test"
+    db_name = os.environ['dbname']
 
     # 데이터베이스 drop and create
     drop_database(db, db_name)  # DB 사용중이면 에러터짐
@@ -37,13 +36,14 @@ def db_init():
     info_str = spread_dict(db_info)
     db.connect(info_str)
 
+    # rank 테이블 생성
     create_table_query = """
     create table rank(id uuid primary key,name varchar(100), start_dt timestamp, end_dt timestamp, attemps integer);
     """
-
-    # rank 테이블 생성
     db.execute_query_no_return(create_table_query)
-    for i in range(10):
+    
+    # sample 데이터 생성
+    for _ in range(10):
         sample_data: dict[str, Union[str, UUID, datetime.date, int]] = {
             "id_": uuid4(),
             "name": "A" + str(randrange(10, 100)),
@@ -63,6 +63,5 @@ def db_init():
             sample_data["attemps"],
         )
         db.execute_query_no_return(sample_data_query)
-    print("sample inserted")
 
     db.close()

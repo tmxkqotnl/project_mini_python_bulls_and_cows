@@ -7,7 +7,7 @@ class Player:
         self.__attempt:int = attempt
         self.__name:str = name
 
-    def set_id(self, ids:int)->None:
+    def set_id(self, ids:int)->None: 
         self.__id = ids
 
     def get_id(self)->UUID:

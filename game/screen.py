@@ -68,14 +68,14 @@ def game_start(db: DB, p: Player, g: Game) -> Any:
 @clear_terminal_by_os
 def rank_output(db: DB)->None:
     vals, columns = select_top10_minimum_attemps(db)
+    print('\t순위%30s %3s'%('이름','횟수'))
     for i in range(len(vals)):
         print("\t%2d위: " % (i + 1), end="")
-        print("\t%30s %5d" % (vals[i][0], vals[i][1]))
+        print("%30s %5d" % (vals[i][0], vals[i][1]))
 
 
 @clear_terminal_by_os
 def in_game(db: DB)->None:
-    # print("뽜밤뽜밤 숫자 야구의 세계에 온것을 환영합니다!\n세계의 균형을 어지럽히는 악당을 부디 물리쳐주세요!\n")
     while True:
         print("1. 게임 시작하기")
         print("2. 랭킹 확인하기")

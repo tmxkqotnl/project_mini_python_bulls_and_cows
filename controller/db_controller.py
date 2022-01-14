@@ -23,8 +23,7 @@ def drop_database(db: DB, db_name: str) -> None:
     db.execute_query_no_return(
         sql.SQL("drop database if exists {};").format(sql.Identifier(db_name))
     )
-
-
+    
 @error_logger
 def create_database(db: DB, db_name: str) -> None:
     db.execute_query_no_return(

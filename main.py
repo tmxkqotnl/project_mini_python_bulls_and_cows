@@ -3,7 +3,7 @@ import os
 from db.db import DB
 from game.screen import in_game
 from lib.lib import spread_dict
-from seed.sample import db_init
+from seed.sample import seed_db_init
 
 load_dotenv()
 db_info: dict[str, str] = {
@@ -18,7 +18,7 @@ db_info: dict[str, str] = {
 if __name__ == "__main__":
     # DB 초기 세팅(데이터베이스, 테이블 등)
     # python에서 seeding 방법을 모릅니다..
-    db_init() 
+    seed_db_init() 
     
     # DB connect
     db = DB()
