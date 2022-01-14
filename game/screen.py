@@ -28,7 +28,8 @@ def game_start(p:Player,g:Game):
 def rank_output(db:DB):
     vals,columns = select_top10_minimum_attemps(db)
     print(columns)
-    for i in vals:
+    print(vals)
+    for i in range(len(vals)):
         print('%d위: ' % (i+1), end='')
         print("%5s %5d" % (vals[i][0], vals[i][1]))
 
