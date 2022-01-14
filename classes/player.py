@@ -25,15 +25,3 @@ class Player:
 
     def get_attempt(self):
         return self.attempt
-
-
-class Time(Player):
-    def __init__(self, starttime, endtime):
-        self.starttime = datetime.datetime(datetime.datetime.today())
-        self.endtime = None
-
-    def set_starttime(self):
-        self.start_time = datetime.datetime(datetime.datetime.today())
-
-    def set_endtime(self):
-        self.end_time = datetime.datetime(datetime.datetime.today())
