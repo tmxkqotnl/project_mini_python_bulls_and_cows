@@ -1,9 +1,35 @@
 from controller.db_controller import select_top10_minimum_attemps
+from game.game_algorithm import create_numbers
 from lib.lib import clear_terminal_by_os
 from db.db import DB
 from classes.player import Player
-from uuid import uuid4
+from classes.game import Game
+from uuid import UUID, uuid4
 import sys
+
+
+@clear_terminal_by_os
+def init_player():
+    print('\n이름을 입력해주세요! : ',end='')
+    name = sys.stdin.readline().replace('\n','').strip()
+    this_player:Player = Player(uuid4(),0,name)
+    return this_player   
+
+def init_game(player_id:UUID):
+    ans = create_numbers()
+    this_game = Game(player_id,ans)
+    return this_game
+
+# @clear_terminal_by_os
+def game_start(p:Player,g:Game):
+    print(1)
+
+@clear_terminal_by_os
+def rank_output(db:DB):
+    vals,columns = select_top10_minimum_attemps(db)
+    print(columns)
+    for i in vals:
+        print(i)
 
 @clear_terminal_by_os
 def in_game(db:DB):
@@ -14,7 +40,9 @@ def in_game(db:DB):
         print("3. 고만하고 집에가기\n")
         e_c = input("할 일을 정해주세요 : ")
         if e_c == '1':
-            player = set_player()
+            this_player = init_player()
+            this_game = init_game(this_player.get_id())
+            game_start(this_player,this_game)
         elif e_c == '2':
             rank_output(db)
         elif e_c == '3':
@@ -24,25 +52,3 @@ def in_game(db:DB):
             print("그게 아니에요!")
         print(" ")
 
-@clear_terminal_by_os
-def set_player():
-    # p_id = input("당신의 이름은 : ")
-    # print("뽜밤뽜밤 동료로 합류했습니다!")
-    # game_start() 
-    
-    name = sys.stdin.readline().replace('\n','').strip()
-    this_player:Player = Player(uuid4(),0,name)
-    
-    return this_player   
-
-@clear_terminal_by_os
-def game_start():
-    print("장로 : 적이 나타났네! 건투를 비네 %s용사여!\n야구알파고 : 인간 시대의 끝이 도래했다." % p_id)
-
-
-@clear_terminal_by_os
-def rank_output(db:DB):
-    vals,columns = select_top10_minimum_attemps(db)
-    print(columns)
-    for i in vals:
-        print(i)

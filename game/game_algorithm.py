@@ -1,24 +1,35 @@
-from random import randrange,shuffle
+from random import shuffle
 from sys import stdin
-input = stdin.readline()
+
 
 #정답 생성
-def Create_numbers() :
+def create_numbers()-> list[int]:
     arr = [str(_) for _ in range(0,10)]
-    arr = shuffle(arr)[:4]
-
-#def Create_numbers() :
-#    s = set()
-#    while s.__len__()<4:
-#        s.add(randrange(0,10))
+    shuffle(arr)
+    partial = arr[:4]
+    
 
     print("정답 생성 완료")
     print("게임 시작")
+    return list(map(int,partial))
 
 #입력값 체크 #######
-def Check_input(num) :
-    num.split()
-
+def get_input() :
+    print('숫자(0~9) 4개를 입력해주세요! EX. 1 2 3 4')
+    
+    inp = None
+    while True:
+        input = stdin.readline
+        inp = list(map(int,input().split()))
+        if inp.__len__() !=4:
+            print('띄어쓰기 구분 4개의 숫자(0~9)를 입력해주세요!')
+            continue
+        elif list(filter(lambda x:x>=10 or x<0,inp)).__len__() > 0:
+            print('0부터 9까지의 숫자를 입력해주세요!')
+            continue
+        break
+    
+    return inp
 
 #정답 체크
 def Check_number(num, number) :
