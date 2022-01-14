@@ -26,10 +26,10 @@ def input_rank(db:DB,p:Player,g:Game) :
     while True:
         print(g.get_situation())
         res = input("랭킹을 저장하시겠습니까? 'y' or 'n' ")
-        print(res)
         if res in ['y','Y'] :
             return insert_game_result(db,p,g)
         elif res in ['n','N']:
+            clear_terminal_by_os_f()
             print("okay goodbye")
             return
         else :

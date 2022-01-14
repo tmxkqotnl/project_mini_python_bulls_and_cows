@@ -15,7 +15,6 @@ class DB:
         # self.set_isolation_level()
         self.__cursor = self.__connection.cursor()
 
-        print("DB Connected")
 
     @error_logger
     def execute_query_has_return(self, query: str) -> [list[tuple], list[str]]:
@@ -31,7 +30,6 @@ class DB:
     def close(self) -> None:
         try:
             self.__connection.close()
-            print("DB closed")
         except pg2.DatabaseError as e:
             exit(0)
 
