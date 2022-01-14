@@ -13,8 +13,8 @@ import sys
 def init_player() -> Player:
     print("\n이름을 입력해주세요! : ", end="")
     name = sys.stdin.readline().replace("\n", "").strip()
+    
     this_player: Player = Player(uuid4(), 0, name)
-
     return this_player
 
 
@@ -32,6 +32,7 @@ def input_rank(db: DB, p: Player, g: Game) -> Any:
             return insert_game_result(db, p, g)
         elif res in ["n", "N"]:
             clear_terminal_by_os_f()
+            
             print("okay goodbye")
             return
         else:
@@ -55,16 +56,16 @@ def game_start(db: DB, p: Player, g: Game) -> Any:
 
     if s == 4:
         
-        print("\n\t###############\n\t##이겼습니다!##\n\t###############\n")
+        print("\n\n\t###############\n\t##이겼습니다!##\n\t###############\n")
         g.set_stituation(STATE["end"])
 
         return input_rank(db, p, g)
 
-    print("***************")
+    print("*********************************************")
     print("\n\tStrike : {}, Ball : {}\n".format(s, b))
-    print("***************")
+    print("*********************************************")
     print("\n\t나의 답안 : {}\n".format(my_ans))
-    print("***************")
+    print("*********************************************")
 
     return game_start(db, p, g)
 
