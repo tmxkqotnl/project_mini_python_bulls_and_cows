@@ -18,13 +18,13 @@ def error_logger(f):
 def clear_terminal_by_os(f):
     # only win, mac, linux classified
     name_system = platform.system()
-
     def Wrapper(*args, **kargs):
         if "Windows" in name_system:
             system("cls")
         else:
-            system("cls")
-        return f(*args, **kargs)
+            system("clear")
+        
+        return f(*args)
 
     return Wrapper
 
