@@ -34,7 +34,7 @@ def create_database(db: DB, db_name: str) -> None:
 
 @error_logger
 def select_top10_minimum_attemps(db: DB) -> list[list[tuple], list[str]]:
-    query = """select name, attemps from rank order by attemps desc limit 10;"""
+    query = """select name, attemps from rank order by attemps limit 10;"""
     return db.execute_query_has_return(query)
 
 
