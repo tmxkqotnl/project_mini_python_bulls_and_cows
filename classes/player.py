@@ -1,7 +1,6 @@
 import datetime
 
 class Player :
-    
     def __init__(self, id, attempt) :
         self.id = id
         self.attempt = attempt
