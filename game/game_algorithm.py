@@ -42,5 +42,9 @@ def Check_number(ans: list[int], my_ans: list[int]):
                 Strike = Strike + 1
             else:
                 Ball = Ball + 1
+<<<<<<< HEAD
     return Strike, Ball
 
+=======
+    return Strike , Ball
+>>>>>>> 82fcd3ec9087b7a65da2164b22c1c8016ba87de4
