@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from uuid import UUID
-from lib.consts import GAME_STATE
+from lib.consts import STATE
 
 
 class Game:
@@ -11,7 +11,7 @@ class Game:
         answer: list[int] = [0, 0, 0, 0],
         ball: int = 0,
         strike: int = 0,
-        situation: int = GAME_STATE["게임시작 전"],
+        situation: int = STATE['start'],
         start_dt: datetime = datetime.now(),
         end_dt: Optional[datetime] = None,
     ):

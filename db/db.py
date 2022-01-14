@@ -23,7 +23,7 @@ class DB:
         return [self.__cursor.fetchall(), column_names]
 
     @error_logger
-    def execute_query_no_return(self, query: str)->None:
+    def execute_query_no_return(self, query: str) -> None:
         self.__cursor.execute(query)
 
     def close(self) -> None:
@@ -32,10 +32,12 @@ class DB:
         except pg2.DatabaseError as e:
             exit(0)
 
+    # typing 해결 안됌..
     @error_logger
     def get_connection(self) -> Optional[Any]:
         return self.__connection
 
+    # typing 해결 안됌..
     @error_logger
     def get_cursor(self) -> Optional[Any]:
         return self.__cursor

@@ -7,33 +7,40 @@ from uuid import UUID, uuid4
 from dotenv import load_dotenv
 from controller.db_controller import create_database, drop_database
 from db.db import DB
+from lib.consts import DB_INFO
 from lib.lib import spread_dict
 import os
 
-load_dotenv()
-db_info: dict[str, str] = {
-    "user": os.environ["user"],
-    "password": os.environ["password"],
-    "host": os.environ["host"],
-    "port": os.environ["port"],
-}
+# load_dotenv()
+# db_info: dict[str, str] = {
+#     "user": os.environ["user"],
+#     "password": os.environ["password"],
+#     "host": os.environ["host"],
+#     "port": os.environ["port"],
+# }
 
 
 def seed_db_init():
     db = DB()
     # 데이터베이스 생성을 위한 시나리오
-    info_str = spread_dict(db_info)
+    copied:dict[str,str] = {}
+    for k,v in DB_INFO.items():
+        if k != 'dbname':
+            copied[k] = v
+    
+    info_str = spread_dict(copied)
     db.connect(info_str)
-    db_name = os.environ['dbname']
-
+    
     # 데이터베이스 drop and create
+    db_name = os.environ['dbname']
     drop_database(db, db_name)  # DB 사용중이면 에러터짐
     create_database(db, db_name)
+    
     db.close()
 
     # DB 재연결 및 테이블 재생성 시나리오
-    db_info["dbname"] = db_name
-    info_str = spread_dict(db_info)
+    copied['dbname'] = DB_INFO['dbname']
+    info_str = spread_dict(copied)
     db.connect(info_str)
 
     # rank 테이블 생성
@@ -51,7 +58,7 @@ def seed_db_init():
                 randrange(2000, 2010), randrange(1, 12), randrange(1, 28)
             ),
             "end_dt": datetime.date(
-                randrange(2011, 2022), randrange(1, 12), randrange(1, 28)
+                randrange(2011, 2021), randrange(1, 12), randrange(1, 28)
             ),
             "attemps": randrange(10, 100),
         }
