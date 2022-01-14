@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import os
-
 from db.db import DB
+from game.screen import in_game
 from lib.lib import spread_dict
 from seed.sample import db_init
 
@@ -20,6 +20,8 @@ if __name__ == "__main__":
     
     db = DB()
     db.connect(spread_dict(db_info))
-
+    in_game(db)
+    
     db.close()
+    exit(0)
 
