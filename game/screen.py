@@ -24,7 +24,6 @@ def init_game(player_id:UUID):
 
 def input_rank(db:DB,p:Player,g:Game) :
     while True:
-        print(g.get_situation())
         res = input("랭킹을 저장하시겠습니까? 'y' or 'n' ")
         if res in ['y','Y'] :
             return insert_game_result(db,p,g)
@@ -76,7 +75,7 @@ def in_game(db:DB):
     # print("뽜밤뽜밤 숫자 야구의 세계에 온것을 환영합니다!\n세계의 균형을 어지럽히는 악당을 부디 물리쳐주세요!\n")
     while True:
         print("1. 적을 무찌르자!")
-        print("2. 랭?킹")
+        print("2. 랭킹")
         print("3. 고만하고 집에가기\n")
         e_c = input("할 일을 정해주세요 : ")
         if e_c == '1':
