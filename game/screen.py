@@ -1,6 +1,8 @@
-from controller.db_controller import select_top10_minimum_attemps
-from game.game_algorithm import create_numbers
-from lib.lib import clear_terminal_by_os
+from typing import Any
+from controller.db_controller import insert_game_result, select_top10_minimum_attemps
+from game.game_algorithm import Check_number, create_numbers, get_input
+from lib.consts import GAME_STATE
+from lib.lib import clear_terminal_by_os, clear_terminal_by_os_f
 from db.db import DB
 from classes.player import Player
 from classes.game import Game
@@ -20,9 +22,47 @@ def init_game(player_id:UUID):
     this_game = Game(player_id,ans)
     return this_game
 
+def input_rank(db:DB,p:Player,g:Game) :
+    while True:
+        print(g.get_situation())
+        res = input("랭킹을 저장하시겠습니까? 'y' or 'n' ")
+        print(res)
+        if res in ['y','Y'] :
+            return insert_game_result(db,p,g)
+        elif res in ['n','N']:
+            print("okay goodbye")
+            return
+        else :
+            print("yes or no 중에 입력하세요")
+    
+    
+    
 # @clear_terminal_by_os
-def game_start(p:Player,g:Game):
-    print(1)
+def game_start(db:DB,p:Player,g:Game) -> Any:
+    print(g.get_answer())
+    my_ans:list[int] = get_input()
+    if my_ans.__len__() == 0:
+        print('이번 게임 종료')
+        g.set_stituation(GAME_STATE['게임 끝'])
+        return None
+    
+    clear_terminal_by_os_f()    
+    s,b = Check_number(my_ans,g.get_answer())
+    
+    if s == 4:
+        print('이겼습니다!')
+        print(GAME_STATE['게임 끝'])
+        g.set_stituation(GAME_STATE['게임 끝'])
+        return input_rank(db,p,g)
+    
+    print('***************')
+    print('\n\tStrike : {}, Ball : {}\n'.format(s,b))
+    print('***************')
+    print('\n\t나의 답안 : {}\n'.format(my_ans))
+    print('***************')
+    return game_start(db,p,g)
+    
+
 
 @clear_terminal_by_os
 def rank_output(db:DB):
@@ -44,7 +84,7 @@ def in_game(db:DB):
         if e_c == '1':
             this_player = init_player()
             this_game = init_game(this_player.get_id())
-            game_start(this_player,this_game)
+            game_start(db,this_player,this_game)
         elif e_c == '2':
             rank_output(db)
         elif e_c == '3':

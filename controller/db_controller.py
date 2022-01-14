@@ -1,21 +1,21 @@
+from ctypes import Union
+from datetime import datetime
+from typing import Any
+from classes.game import Game
+from classes.player import Player
 from db.db import DB
 from lib.lib import error_logger, spread_dict
 from psycopg2 import sql
-from uuid import uuid4
+from uuid import UUID, uuid4
 
-# @error_logger
-# def insert_game_result(db:DB,game:Game)->None:
-#     data:dict[str,str] = {
-#         'id':uuid4(),
-#         'name':game.name,
-#         'start_dt':game.start,
-#         'end_dt':game.end,
-#         'attemps':game.attemps
-#     }
-#     data_str = spread_dict(data,',')
-#     q = "insert into rank values({})".format(data_str)
 
-#     return db.execute_query_has_return(q)
+@error_logger
+def insert_game_result(db: DB, p: Player, g: Game) -> None:
+    q = "insert into rank values('{}','{}','{}','{}',{})".format(
+        p.get_id(), p.get_name(), g.get_starttime(), datetime.now(), p.get_attempt()
+    )
+
+    return db.execute_query_no_return(q)
 
 
 @error_logger
@@ -34,12 +34,11 @@ def create_database(db: DB, db_name: str) -> None:
 
 @error_logger
 def select_top10_minimum_attemps(db: DB) -> list[list[tuple], list[str]]:
-    query = (
-        """select name, attemps from rank order by attemps desc limit 10;"""
-    )
+    query = """select name, attemps from rank order by attemps desc limit 10;"""
     return db.execute_query_has_return(query)
 
-@error_logger   
-def select_top10_minimum_time(db:DB) -> list[list[tuple], list[str]]:
+
+@error_logger
+def select_top10_minimum_time(db: DB) -> list[list[tuple], list[str]]:
     query = """select name, min(end_dt - start_dt) as takes_time from rank group by name order by takes_time limit 5;"""
     return db.execute_query_has_return(query)
