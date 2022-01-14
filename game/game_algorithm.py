@@ -12,7 +12,7 @@ def create_numbers() -> list[int]:
 
 
 def get_input():
-    print("숫자(0~9) 4개를 입력해주세요! EX. 1 2 3 4")
+    print("\n숫자(0~9) 4개를 입력해주세요! EX. 1 2 3 4")
     print("\n** 포기하시려면 n을 입력해주세요! **\n")
     inp = []
     while True:

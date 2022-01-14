@@ -39,8 +39,9 @@ def input_rank(db:DB,p:Player,g:Game) :
     
 # @clear_terminal_by_os
 def game_start(db:DB,p:Player,g:Game) -> Any:
-    print(g.get_answer())
+    print(g.get_answer()) # 나중에 삭제
     my_ans:list[int] = get_input()
+    
     if my_ans.__len__() == 0:
         print('\n이번 게임 종료\n')
         g.set_stituation(GAME_STATE['게임 끝'])
