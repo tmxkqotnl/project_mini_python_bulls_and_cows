@@ -51,6 +51,7 @@ def game_start(db:DB,p:Player,g:Game) -> Any:
     
     if s == 4:
         print('이겼습니다!')
+        p.set_attemp(p.get_attempt()+1)
         g.set_stituation(GAME_STATE['게임 끝'])
         return input_rank(db,p,g)
     
@@ -59,6 +60,7 @@ def game_start(db:DB,p:Player,g:Game) -> Any:
     print('***************')
     print('\n\t나의 답안 : {}\n'.format(my_ans))
     print('***************')
+    p.set_attemp(p.get_attempt()+1)
     return game_start(db,p,g)
     
 
@@ -67,8 +69,8 @@ def game_start(db:DB,p:Player,g:Game) -> Any:
 def rank_output(db:DB):
     vals,columns = select_top10_minimum_attemps(db)
     for i in range(len(vals)):
-        print('%d위: ' % (i+1), end='')
-        print("%5s %5d" % (vals[i][0], vals[i][1]))
+        print('\t%2d위: ' % (i+1), end='')
+        print("\t%30s %5d" % (vals[i][0], vals[i][1]))
 
 @clear_terminal_by_os
 def in_game(db:DB):
