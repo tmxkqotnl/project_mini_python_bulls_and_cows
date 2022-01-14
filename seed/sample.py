@@ -4,21 +4,11 @@ import datetime
 from random import randrange
 from typing import Union
 from uuid import UUID, uuid4
-from dotenv import load_dotenv
 from controller.db_controller import create_database, drop_database
 from db.db import DB
 from lib.consts import DB_INFO
 from lib.lib import spread_dict
 import os
-
-# load_dotenv()
-# db_info: dict[str, str] = {
-#     "user": os.environ["user"],
-#     "password": os.environ["password"],
-#     "host": os.environ["host"],
-#     "port": os.environ["port"],
-# }
-
 
 def seed_db_init():
     db = DB()
