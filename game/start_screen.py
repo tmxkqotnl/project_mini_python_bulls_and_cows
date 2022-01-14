@@ -1,7 +1,6 @@
 from time import sleep
 
 
-# 시작화면 함수
 def start_screen():
     print("장로 : 숫자 야구의 세계에 온것을 환영하네!\n숫자 야구로 세계의 균형을 어지럽히는 악당을 부디 무찔러 주게!\n")
     while True:
