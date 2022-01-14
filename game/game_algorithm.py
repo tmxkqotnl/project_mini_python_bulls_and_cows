@@ -45,7 +45,3 @@ while Strike != 4 :
     count = count + 1
     Strike, Ball = Check_number(num)
     print(" %d번째 시도 => %d Strike, %d Ball" %Count, Strike, Ball)
-
-print(" 4개의 숫자를 모두 맞추셨습니다. ")
-
-print(arr)
