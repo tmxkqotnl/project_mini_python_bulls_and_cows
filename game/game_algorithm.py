@@ -17,11 +17,11 @@ def get_input():
     inp = []
     while True:
         inp:Union[list[str],list[int]] = stdin.readline().split()
-        
+        inp_set = set(inp)
         if 'n' in inp:
             return []
-        if inp.__len__() != 4 or not check_type_int(inp):
-            print("띄어쓰기 구분 4개의 숫자(0~9)를 입력해주세요!")
+        if inp_set.__len__() != 4 or inp.__len__() != 4 or not check_type_int(inp):
+            print("띄어쓰기 구분 고유한 4개의 숫자(0~9)를 입력해주세요!")
             continue
         else:
             inp = list(map(int,inp))    
