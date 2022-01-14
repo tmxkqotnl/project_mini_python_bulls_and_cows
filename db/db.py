@@ -20,9 +20,9 @@ class DB:
     @error_logger
     def execute_query_has_return(self, query: str) -> [list[tuple], list[str]]:
         self.__cursor.execute(query)
-        column_names = [r[0] for r in self._cursor.description]
+        column_names = [r[0] for r in self.__cursor.description]
 
-        return [self._cursor.fetchall(), column_names]
+        return [self.__cursor.fetchall(), column_names]
 
     @error_logger
     def execute_query_no_return(self, query: str):
