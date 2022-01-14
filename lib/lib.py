@@ -18,23 +18,26 @@ def error_logger(f):
 def clear_terminal_by_os(f):
     # only win, mac, linux classified
     name_system = platform.system()
+
     def Wrapper(*args, **kargs):
         if "Windows" in name_system:
             system("cls")
         else:
             system("clear")
-        
+
         return f(*args)
 
     return Wrapper
+
+
 def clear_terminal_by_os_f():
     name_system = platform.system()
-    
+
     if "Windows" in name_system:
         system("cls")
     else:
         system("clear")
-        
+
 
 def spread_dict(d: dict[str, str], separator: str = " ") -> str:
     items = []
@@ -45,8 +48,8 @@ def spread_dict(d: dict[str, str], separator: str = " ") -> str:
     return separator.join(items)
 
 
-def check_type_int(data:list[str]):
+def check_type_int(data: list[str])->bool:
     for i in data:
-            if not i.isnumeric():
-                return False
+        if not i.isnumeric():
+            return False
     return True

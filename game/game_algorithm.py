@@ -1,6 +1,6 @@
 from random import shuffle
 from sys import stdin
-from typing import Union
+from typing import Any, Union
 
 from lib.lib import check_type_int
 
@@ -11,7 +11,7 @@ def create_numbers() -> list[int]:
     return arr[:4]
 
 
-def get_input():
+def get_input()->Any:
     print("\n숫자(0~9) 4개를 입력해주세요! EX. 1 2 3 4")
     print("\n** 포기하시려면 n을 입력해주세요! **\n")
     inp = []
@@ -33,7 +33,7 @@ def get_input():
     return inp
 
 
-def Check_number(ans: list[int], my_ans: list[int]):
+def Check_number(ans: list[int], my_ans: list[int])->list[int]:
     Strike = 0
     Ball = 0
     for i in range(0, 4):
@@ -42,5 +42,5 @@ def Check_number(ans: list[int], my_ans: list[int]):
                 Strike = Strike + 1
             else:
                 Ball = Ball + 1
-    return Strike, Ball
+    return [Strike, Ball]
 

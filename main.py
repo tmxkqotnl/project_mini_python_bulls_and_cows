@@ -16,11 +16,16 @@ db_info: dict[str, str] = {
 
 
 if __name__ == "__main__":
-    db_init() # python에서 seeding 방법을 모릅니다..
+    # DB 초기 세팅(데이터베이스, 테이블 등)
+    # python에서 seeding 방법을 모릅니다..
+    db_init() 
     
+    # DB connect
     db = DB()
     db.connect(spread_dict(db_info))
-    in_game(db)
+    
+    # game start
+    in_game(db) 
     
     db.close()
     exit(0)

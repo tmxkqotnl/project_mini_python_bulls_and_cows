@@ -1,3 +1,5 @@
+## 개판 5분전 코드.. 리팩토링 할 것
+
 import datetime
 from random import randrange
 from typing import Union

@@ -15,7 +15,6 @@ class DB:
         # self.set_isolation_level()
         self.__cursor = self.__connection.cursor()
 
-
     @error_logger
     def execute_query_has_return(self, query: str) -> [list[tuple], list[str]]:
         self.__cursor.execute(query)
@@ -24,7 +23,7 @@ class DB:
         return [self.__cursor.fetchall(), column_names]
 
     @error_logger
-    def execute_query_no_return(self, query: str):
+    def execute_query_no_return(self, query: str)->None:
         self.__cursor.execute(query)
 
     def close(self) -> None:
