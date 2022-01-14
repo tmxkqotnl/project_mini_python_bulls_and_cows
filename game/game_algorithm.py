@@ -42,17 +42,3 @@ def Check_number(num, number) :
             else :
                 Ball = Ball + 1
     return Strike , Ball
-
-#게임 진행
-Count = 0  #시도 횟수
-Strike = 0  #스트라이크
-Ball = 0  #볼
-
-while Strike != 4 :
-    num = input("0~9 사이의 중복되지 않는 숫자 4개를 입력하세요. ")
-    if not Check_number(num) :
-        print("0~9 사이의 중복되지 않는 숫자 4개를 입력하세요. ")
-        continue
-    count = count + 1
-    Strike, Ball = Check_number(num)
-    print(" %d번째 시도 => %d Strike, %d Ball" %Count, Strike, Ball)
